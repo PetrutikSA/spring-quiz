@@ -1,21 +1,17 @@
 package ru.yandex.practicum.quiz.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import ru.yandex.practicum.quiz.config.AppConfig;
 import ru.yandex.practicum.quiz.model.QuizLog;
 
 import java.io.PrintWriter;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class ReportGenerator {
-    private final String quizTitle;
-
-    @Autowired
-    public ReportGenerator(@Value("${spring-quiz.title:\"Неназванный тест\"}") String quizTitle) {
-        this.quizTitle = quizTitle;
-    }
+    private final AppConfig appConfig;
 
     public void generate(QuizLog quizLog) {
         // Создаём объект PrintWriter, выводящий отчет в консоль
@@ -28,7 +24,7 @@ public class ReportGenerator {
     }
 
     private void write(QuizLog quizLog, PrintWriter writer) {
-        writer.printf("Отчет о прохождении теста %s.\n", quizTitle);
+        writer.printf("Отчет о прохождении теста %s.\n", appConfig.getTitle());
         for (QuizLog.Entry entry : quizLog) {
             // Записываем номер вопроса и текст вопроса
             writer.println("Вопрос " + entry.getNumber() + ": " + entry.getQuestion().getText());
