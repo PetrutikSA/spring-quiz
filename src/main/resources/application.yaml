@@ -18,3 +18,11 @@ spring-quiz:
       # spring-quiz.report.output.path — путь к файлу,
       # в который необходимо записать данные отчёта
       path: "./quiz-result.txt"
+
+spring:
+  main:
+    log-startup-info: false
+    banner-mode: console
+  output:
+    ansi:
+      enabled: always
