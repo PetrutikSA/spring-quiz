@@ -20,6 +20,8 @@ spring-quiz:
       path: "./quiz-result.txt"
 
 spring:
+  config:
+    import: "classpath:quiz/questions.yaml"
   main:
     log-startup-info: false
     banner-mode: console
